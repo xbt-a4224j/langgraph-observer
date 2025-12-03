@@ -25,7 +25,7 @@ jobs:
 
       - name: Install semantic-release
         run: |
-          uv pip install python-semantic-release
+          uv pip install --system python-semantic-release
 
       - name: Run semantic-release
         env:
