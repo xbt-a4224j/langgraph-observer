@@ -10,9 +10,16 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # <-- CRITICAL
+
+      - name: Fetch tags
+        run: |
+          git fetch --tags --force    # <-- CRITICAL
 
       - name: Set up Python
         uses: actions/setup-python@v5
