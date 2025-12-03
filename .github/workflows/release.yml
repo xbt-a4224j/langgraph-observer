@@ -1,4 +1,5 @@
 name: Release
+
 on:
   push:
     branches:
@@ -6,36 +7,34 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0        # <-- CRITICAL
-
-      - name: Fetch tags
-        run: |
-          git fetch --tags --force    # <-- CRITICAL
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
 
-      - name: Install uv
+      - name: Install dependencies
         run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
+          python -m pip install --upgrade pip
+          python -m pip install python-semantic-release
 
-      - name: Install semantic-release
-        run: |
-          uv pip install --system python-semantic-release
-
-      - name: Run semantic-release
+      - name: Run semantic-release version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          semantic-release publish
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m semantic_release version
+
+      - name: Run semantic-release publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m semantic_release publish

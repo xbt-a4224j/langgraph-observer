@@ -1,7 +1,7 @@
 [project]
 name = "langgraph-observer"
-version = "0.1.0"
-description = "Add your description here"
+dynamic = ["version"]
+description = "Dashboard for evaluating a langgraph"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
