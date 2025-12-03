@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.1.0 (2025-12-03)
+
+### Features
+
+- Confirming semver
+  ([`ed71e4a`](https://github.com/xbt-a4224j/langgraph-observer/commit/ed71e4ae687b3f72f53173a7ba6e6e5c68c63cd8))
+
+
 ## v1.0.0 (2025-12-03)
 
 ### Bug Fixes
