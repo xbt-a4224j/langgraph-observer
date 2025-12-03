@@ -1,0 +1,16 @@
+[project]
+name = "langgrаph-observer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[tool.semantic_release]
+version_source = "tag"
+version_variable = "pyproject.toml:project.version"
+upload_to_repository = false
+build_command = "false"
+commit_version_number = true
+changelog_file = "CHANGELOG.md"
+branch = "main"
