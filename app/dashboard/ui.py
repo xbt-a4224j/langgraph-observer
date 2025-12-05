@@ -32,20 +32,20 @@ from pathlib import Path
 # Load base64-encoded logo (expected in same folder as this ui.py)
 logo_path = Path(__file__).parent / "galileo_logo.png"
 
-try:
-    with open(logo_path, "rb") as f:
-        encoded_logo = base64.b64encode(f.read()).decode("utf-8")
-
-    logo_html = f"""
-    <div style='position:absolute; top:15px; right:25px; z-index:999;'>
-        <img src="data:image/png;base64,{encoded_logo}" width="80">
-    </div>
-    """
-
-    st.html(logo_html)
-
-except Exception as e:
-    st.warning(f"Logo not found at {logo_path}: {e}")
+# try:
+#         with open(logo_path, "rb") as f:
+#             encoded_logo = base64.b64encode(f.read()).decode("utf-8")
+#
+#         logo_html = f"""
+#         <div style='position:absolute; top:15px; right:25px; z-index:999;'>
+#             <img src="data:image/png;base64,{encoded_logo}" width="80">
+#         </div>
+#         """
+#
+#         st.html(logo_html)
+#
+# except Exception as e:
+#     st.warning(f"Logo not found at {logo_path}: {e}")
 
 st.caption("End-to-end observability for your LangGraph workflow")
 
