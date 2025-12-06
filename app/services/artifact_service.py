@@ -44,10 +44,9 @@ class ArtifactService:
             "timestamp": timestamp,
             "input": state.get("user_input"),
             "output": state.get("llm_output"),
-            "explanation": state.get("explanation"),
-            "score": state.get("score"),
             "toxicity_score": state.get("toxicity_score"),
             "hallucination_score": state.get("hallucination_score"),
+            "silly_score": state.get("silly_score"),  # <-- ADD THIS
             "token_usage": state.get("token_usage"),
             "cost": state.get("cost"),
             "duration_seconds": round(duration, 4),

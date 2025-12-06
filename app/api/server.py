@@ -5,10 +5,9 @@ from pydantic import BaseModel
 
 from app.domain.workflow_graph import build_graph
 
-
 app = FastAPI(title="LangGraph Observer API (Refactored)")
 
-# Build the compiled workflow once at startup
+# Build LangGraph workflow once at startup
 graph = build_graph()
 
 
@@ -17,6 +16,7 @@ graph = build_graph()
 # -----------------------------
 class RunRequest(BaseModel):
     input: str
+    silly_mode: bool = False   # <-- NEW, optional
 
 
 # -----------------------------
@@ -26,20 +26,27 @@ class RunRequest(BaseModel):
 def run_graph(payload: RunRequest):
     """
     Runs the full LangGraph workflow and returns final state.
-    Identical to the old API structure.
+    Adds silly_mode to the backend state so the silly-service can read it.
     """
     try:
-        state = {"user_input": payload.input}
+        # Base state
+        state = {
+            "user_input": payload.input,
+            "silly_mode": payload.silly_mode,  # <-- IMPORTANT
+        }
+
+        # Execute LangGraph
         result = graph.invoke(state)
+
+        # Return final output state
         return {"state": result}
 
     except Exception as e:
-        # Preserve original FastAPI error formatting
         raise HTTPException(status_code=500, detail=str(e))
 
 
 # -----------------------------
-# Optional: Basic health check
+# Health Check
 # -----------------------------
 @app.get("/health")
 def health():
