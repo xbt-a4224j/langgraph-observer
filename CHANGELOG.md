@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.3.0 (2025-12-06)
+
+### Features
+
+- Silly service
+  ([`8020b1e`](https://github.com/xbt-a4224j/langgraph-observer/commit/8020b1ed7b386a937dbfe5fd383ce5d6b8cd3910))
+
+
 ## v2.2.0 (2025-12-06)
 
 ### Features
