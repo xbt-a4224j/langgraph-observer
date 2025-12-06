@@ -1,5 +1,0 @@
-{
-  "user_input": "Explain LangGraph in one paragraph.\n",
-  "llm_output": "LangGraph is an innovative framework designed to enhance the capabilities of natural language processing (NLP) models by integrating them with graph-based representations of knowledge. It leverages the strengths of both language models and graph databases to facilitate better understanding and reasoning about complex data relationships. LangGraph allows for the construction and manipulation of graphs that represent linguistic information, enabling applications such as enhanced text comprehension, information retrieval, and semantic analysis. By combining these technologies, LangGraph aims to improve the performance of NLP tasks, making systems more adept at interpreting context and nuances in language.",
-  "explanation": "Summary: LangGraph is an innovative framework designed to enhance the capabilities of natural language processing (NLP) models by..."
-}

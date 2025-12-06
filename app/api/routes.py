@@ -1,18 +1,23 @@
+# app/api/routes.py
+
 from fastapi import APIRouter
-from app.graph.workflow import build_graph
-from .models import RunGraphRequest, RunGraphResponse
+from pydantic import BaseModel
+
+from app.domain.workflow_graph import build_graph
 
 router = APIRouter()
-
-# Build the graph once at import time
-graph = build_graph()
-
-@router.post("/run-graph", response_model=RunGraphResponse)
-async def run_graph(payload: RunGraphRequest):
-    result = graph.invoke({"user_input": payload.input})
-    return RunGraphResponse(state=result)
+graph = build_graph()  # Precompiled workflow
 
 
-@router.get("/health")
-async def health():
-    return {"status": "ok"}
+class RunRequest(BaseModel):
+    input: str
+
+
+@router.post("/run-graph")
+def run_graph(payload: RunRequest):
+    """
+    Executes the full LangGraph pipeline with the provided input text.
+    """
+    state = {"user_input": payload.input}
+    result = graph.invoke(state)
+    return {"state": result}
