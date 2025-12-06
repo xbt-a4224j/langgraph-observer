@@ -4,7 +4,6 @@ from langgraph.graph import StateGraph, END
 
 # Import services
 from app.services.llm_service import LLMService
-from app.services.explanation_service import ExplanationService
 from app.services.toxicity_service import ToxicityService
 from app.services.hallucination_service import HallucinationService
 from app.services.artifact_service import ArtifactService
@@ -18,7 +17,6 @@ def build_graph():
 
     # Instantiate services
     llm = LLMService()
-    explain = ExplanationService()
     toxic = ToxicityService()
     halluc = HallucinationService()
     artifacts = ArtifactService()
@@ -27,7 +25,6 @@ def build_graph():
     workflow = StateGraph(dict)
 
     workflow.add_node("generate", llm.generate)
-    workflow.add_node("explain", explain.explain)  # alias to score_explanation
     workflow.add_node("toxicity", toxic.score_toxicity)
     workflow.add_node("hallucination", halluc.score_hallucination)
     workflow.add_node("artifact", artifacts.save_artifact)

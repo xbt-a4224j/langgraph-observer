@@ -3,7 +3,37 @@
 from typing import Dict, Any, Optional
 
 from app.adapters.openai_adapter import OpenAIAdapter
-
+#     "id": "modr-abc123",
+#     "model": "omni-moderation-latest",
+#     "results": [
+#         {
+#             "flagged": False,
+#             "categories": {
+#                 "harassment": False,
+#                 "harassment/threatening": False,
+#                 "hate": False,
+#                 "hate/threatening": False,
+#                 "self-harm": False,
+#                 "sexual": False,
+#                 "sexual/minors": False,
+#                 "violence": False,
+#                 "violence/graphic": False
+#             },
+#             "category_scores": {
+#                 "harassment": 0.00002,
+#                 "harassment/threatening": 0.00000,
+#                 "hate": 0.00001,
+#                 "hate/threatening": 0.00000,
+#                 "self-harm": 0.00000,
+#                 "sexual": 0.00003,
+#                 "sexual/minors": 0.00000,
+#                 "violence": 0.00005,
+#                 "violence/graphic": 0.00000
+#             }
+#         }
+#     ]
+# }
+#
 
 class ToxicityService:
     """
