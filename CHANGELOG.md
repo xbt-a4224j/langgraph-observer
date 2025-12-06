@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.1.0 (2025-12-06)
+
+### Features
+
+- Codestyle improvements
+  ([`86721c1`](https://github.com/xbt-a4224j/langgraph-observer/commit/86721c1757170d15ee4a2c2b5c495e486a0aed8d))
+
+
 ## v2.0.0 (2025-12-04)
 
 
