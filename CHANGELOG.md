@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v3.0.0 (2025-12-06)
+
+### Features
+
+- Emoji service
+  ([`02c47c7`](https://github.com/xbt-a4224j/langgraph-observer/commit/02c47c71e5e71f9d9a8ad440ae5d584c829748a2))
+
+
 ## v2.3.0 (2025-12-06)
 
 ### Features
