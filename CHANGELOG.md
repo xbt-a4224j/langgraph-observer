@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.2.0 (2025-12-06)
+
+### Features
+
+- Adding tests for ci
+  ([`07181b5`](https://github.com/xbt-a4224j/langgraph-observer/commit/07181b5b49dac1c97754eb9d52fe6d340ddc600a))
+
+
 ## v2.1.0 (2025-12-06)
 
 ### Features
