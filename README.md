@@ -14,8 +14,8 @@ A compact environment for running and inspecting a LangGraph workflow. It includ
 The workflow runs:
 
 1. Generate LLM output  
-2. Optionally apply a “silly” transformation  
-3. Compute silly score  
+2. Optionally apply a “emoji-fy” transformation  
+3. Compute emoji-ness score  
 4. Compute toxicity score  
 5. Compute hallucination score  
 6. Save an artifact and append run history  
@@ -30,8 +30,8 @@ Features:
 
 - Prompt input + sample prompts  
 - **Run Workflow** button  
-- **Make More Silly** button for iterative transformations  
-- Sidebar with metrics (toxicity, hallucination, silly score, duration)  
+- **Make More Emoji** button for iterative & interactive transformations  
+- Sidebar with metrics (toxicity, hallucination, emoji score, duration)  
 - Recent runs table  
 - Full-state JSON output  
 
