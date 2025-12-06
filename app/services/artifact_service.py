@@ -7,12 +7,8 @@ from datetime import datetime
 from typing import Dict, Any
 
 
+# Saves per-run artifacts and appends run history.
 class ArtifactService:
-    """
-    Saves per-run artifacts and appends run history.
-    Fully replaces the old artifact_node.
-    """
-
     def __init__(self):
         base_dir = "app/storage"
         self.artifact_dir = os.path.join(base_dir, "artifacts")
@@ -25,7 +21,6 @@ class ArtifactService:
 
     def save_artifact(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Equivalent to the old artifact_node:
         - computes duration
         - writes JSON artifact
         - appends JSONL log

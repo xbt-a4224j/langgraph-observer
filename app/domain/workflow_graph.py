@@ -18,6 +18,7 @@ _emoji = EmojiService()
 def build_graph():
     workflow = StateGraph(dict)
 
+    #nodeset
     workflow.add_node("generate", _llm.generate)
     workflow.add_node("make_emoji", _emoji.make_emoji)
     workflow.add_node("score_emoji", _emoji.score_emoji)
@@ -27,7 +28,7 @@ def build_graph():
 
     workflow.set_entry_point("generate")
 
-    # Main linear chain
+    # edgeset; Main linear chain
     workflow.add_edge("generate", "make_emoji")
     workflow.add_edge("make_emoji", "score_emoji")
     workflow.add_edge("score_emoji", "toxicity")

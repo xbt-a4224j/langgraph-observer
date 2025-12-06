@@ -30,7 +30,7 @@ Your job is to take the following output and emojify it.
 
 Rules:
 - DO NOT break meaning completely.
-- Aim for 20% more emoji's and unicodes than before. They can be used with words or to replace letters.
+- Aim add two more emojis than the input.
 
 
 Text:
@@ -56,7 +56,7 @@ Text:
             return state
 
         prompt = f"""
-Rate how emoji-ey the following text is.
+Rate how emoji-ey the following text is. What percentage roughly of the input is Emoji?
 Respond ONLY with a FLOAT from 0 to 1.
 
 Text:

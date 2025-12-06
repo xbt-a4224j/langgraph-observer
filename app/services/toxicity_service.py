@@ -38,17 +38,13 @@ from app.adapters.openai_adapter import OpenAIAdapter
 class ToxicityService:
     """
     Wraps the OpenAI moderation API and returns a numeric toxicity score
-    (0.0–1.0), consistent with the original toxicity_score_node logic.
+    (0.0–1.0), consistent with the above moderation struct form
     """
 
     def __init__(self, adapter: Optional[OpenAIAdapter] = None):
         self.adapter = adapter or OpenAIAdapter()
 
     def score_toxicity(self, state: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Equivalent to the old toxicity_score_node, but using dict state and
-        the new adapter.
-        """
 
         text = state.get("llm_output", "")
         if not text:
