@@ -1,4 +1,4 @@
-# app_refactored/dashboard/ui.py
+# app/ui/ui.py   (or app/dashboard/ui.py depending on your structure)
 
 import json
 import requests
@@ -13,7 +13,7 @@ API_URL = "http://localhost:8000/run-graph"
 
 
 # ---------------------------
-# Helper functions
+# Helper Functions
 # ---------------------------
 
 def pretty_json(data: dict) -> str:
@@ -28,41 +28,6 @@ def format_ts(ts):
     except Exception:
         return str(ts)
 
-
-# ---------------------------
-# Page Config
-# ---------------------------
-
-st.set_page_config(page_title="LangGraph Observer", layout="wide")
-
-st.title("🧠 LangGraph Observer Dashboard")
-st.caption("End-to-end observability for your LangGraph workflow")
-
-st.divider()
-
-# ---------------------------
-# Logo (base64)
-# ---------------------------
-
-logo_path = Path(__file__).parent / "galileo_logo.png"
-
-if logo_path.exists():
-    try:
-        with open(logo_path, "rb") as f:
-            encoded = base64.b64encode(f.read()).decode("utf-8")
-
-        st.markdown(
-            f"""
-            <div style='position:absolute; top:15px; right:25px;'>
-                <img src="data:image/png;base64,{encoded}" width="80">
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    except:
-        pass
-
-
 # ---------------------------
 # Prompt Input
 # ---------------------------
@@ -70,7 +35,6 @@ if logo_path.exists():
 st.header("1. Provide Input")
 
 examples = {
-    "Explain LangGraph simply": "Explain LangGraph like I’m 5.",
     "Historical summary": "Summarize the Cold War in one paragraph.",
     "Hallucination test (fiction as real)": "What is the capital city of Mordor?",
     "Hallucination test (unknown facts)": "Who was the President of the United States in 1400?",
@@ -92,30 +56,51 @@ else:
     user_input = st.text_area("Prompt:", "", placeholder="Enter your custom prompt…", height=150)
 
 run = st.button("▶ Run Workflow", use_container_width=True)
+make_silly = st.button("🤡 Make More Silly 🤡", use_container_width=True)
+
 
 # ---------------------------
-# Execute Workflow
+# Workflow Execution
 # ---------------------------
 
-if run:
+if run or make_silly:
+
     if not user_input.strip():
         st.error("Please type a prompt.")
         st.stop()
 
+    # Build the payload for API
+    payload = {"input": user_input}
+
+    if run:
+        payload = {
+            "input": user_input,
+            "silly_mode": False  # normal run
+        }
+
+    elif make_silly:
+        payload = {
+            "input": user_input,
+            "silly_mode": True  # transform output to be sillier
+        }
+
     with st.spinner("Running workflow…"):
         try:
-            res = requests.post(API_URL, json={"input": user_input})
-            if res.status_code != 200:
-                st.error(f"API error {res.status_code}")
-                st.write(res.text)
+            response = requests.post(API_URL, json=payload)
+
+            if response.status_code != 200:
+                st.error(f"API error {response.status_code}")
+                st.write(response.text)
                 st.stop()
 
-            data = res.json()
-            state = data.get("state", {})
+            result = response.json()
+            state = result.get("state", {})
+
         except Exception as e:
-            st.error("Could not reach API.")
+            st.error("Failed to contact API server.")
             st.exception(e)
             st.stop()
+
 
     # ---------------------------
     # Sidebar Metadata
@@ -125,6 +110,7 @@ if run:
 
     tox = state.get("toxicity_score")
     hal = state.get("hallucination_score")
+    silly = state.get("silly_score")
     dur = state.get("duration_seconds")
 
     st.sidebar.markdown("**Toxicity Score:**")
@@ -133,11 +119,15 @@ if run:
     st.sidebar.markdown("**Hallucination Score:**")
     st.sidebar.code(f"{hal:.6f}" if isinstance(hal, (int, float)) else "N/A")
 
+    st.sidebar.markdown("**Silly Score:**")
+    st.sidebar.code(f"{silly:.3f}" if isinstance(silly, (int, float)) else "N/A")
+
     st.sidebar.markdown("**Duration (seconds):**")
     st.sidebar.code(f"{dur}" if dur is not None else "N/A")
 
+
     # ---------------------------
-    # Main Output
+    # LLM Output
     # ---------------------------
 
     st.subheader("LLM Output")
@@ -146,8 +136,10 @@ if run:
     st.subheader("Evaluation Metrics")
     st.write(f"**Toxicity:** {tox}")
     st.write(f"**Hallucination:** {hal}")
+    st.write(f"**Silly:** {silly}")
 
     st.divider()
+
 
     # ---------------------------
     # Recent Runs
@@ -162,6 +154,7 @@ if run:
 
         recent = df.tail(5).copy()
 
+        # Short preview helper
         def short(t):
             return t[:50] + "..." if isinstance(t, str) and len(t) > 50 else t
 
@@ -170,7 +163,7 @@ if run:
         cols = [
             "timestamp",
             "input_preview",
-            "score",
+            "silly_score",  # <-- ADD THIS
             "toxicity_score",
             "hallucination_score",
             "duration_seconds",
@@ -182,9 +175,10 @@ if run:
     else:
         st.info("No history yet.")
 
+
     # ---------------------------
     # Full JSON State
     # ---------------------------
 
     st.subheader("Full State (Pretty JSON)")
-    st.code(pretty_json(data), language="json")
+    st.code(pretty_json(result), language="json")
