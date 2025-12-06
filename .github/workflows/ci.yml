@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - "**"   # run on every branch
+      - "**"
   pull_request:
     branches:
-      - "**"   # optional but recommended
+      - "**"
 
 jobs:
   test:
@@ -25,8 +25,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install uv
+          uv venv                             # ← create virtualenv for uv
           uv pip install -r requirements.txt
           uv pip install pytest
 
       - name: Run tests
-        run: pytest -q
+        run: uv run pytest -q                 # run inside the venv
