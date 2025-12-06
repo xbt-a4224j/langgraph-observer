@@ -4,7 +4,7 @@ A compact environment for running and inspecting a LangGraph workflow. It includ
 
 - A FastAPI backend that executes the graph  
 - A Streamlit dashboard for interactive prompting  
-- Modular services for generation, “silly mode,” toxicity, hallucination scoring, and artifact logging  
+- Modular services for generation, “emoji mode,” toxicity, hallucination scoring, and artifact logging  
 - A simple dict-based state passed between workflow nodes  
 
 ---

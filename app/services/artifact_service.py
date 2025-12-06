@@ -46,7 +46,7 @@ class ArtifactService:
             "output": state.get("llm_output"),
             "toxicity_score": state.get("toxicity_score"),
             "hallucination_score": state.get("hallucination_score"),
-            "silly_score": state.get("silly_score"),  # <-- ADD THIS
+            "emoji_score": state.get("emoji_score"),
             "token_usage": state.get("token_usage"),
             "cost": state.get("cost"),
             "duration_seconds": round(duration, 4),

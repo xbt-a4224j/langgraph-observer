@@ -56,14 +56,14 @@ else:
     user_input = st.text_area("Prompt:", "", placeholder="Enter your custom prompt…", height=150)
 
 run = st.button("▶ Run Workflow", use_container_width=True)
-make_silly = st.button("🤡 Make More Silly 🤡", use_container_width=True)
+make_emoji = st.button("🤡 Make More emoji 🤡", use_container_width=True)
 
 
 # ---------------------------
 # Workflow Execution
 # ---------------------------
 
-if run or make_silly:
+if run or make_emoji:
 
     if not user_input.strip():
         st.error("Please type a prompt.")
@@ -75,13 +75,13 @@ if run or make_silly:
     if run:
         payload = {
             "input": user_input,
-            "silly_mode": False  # normal run
+            "emoji_mode": False  # normal run
         }
 
-    elif make_silly:
+    elif make_emoji:
         payload = {
             "input": user_input,
-            "silly_mode": True  # transform output to be sillier
+            "emoji_mode": True  # transform output to be sillier
         }
 
     with st.spinner("Running workflow…"):
@@ -110,7 +110,7 @@ if run or make_silly:
 
     tox = state.get("toxicity_score")
     hal = state.get("hallucination_score")
-    silly = state.get("silly_score")
+    emoji = state.get("emoji_score")
     dur = state.get("duration_seconds")
 
     st.sidebar.markdown("**Toxicity Score:**")
@@ -119,8 +119,8 @@ if run or make_silly:
     st.sidebar.markdown("**Hallucination Score:**")
     st.sidebar.code(f"{hal:.6f}" if isinstance(hal, (int, float)) else "N/A")
 
-    st.sidebar.markdown("**Silly Score:**")
-    st.sidebar.code(f"{silly:.3f}" if isinstance(silly, (int, float)) else "N/A")
+    st.sidebar.markdown("**emoji Score:**")
+    st.sidebar.code(f"{emoji:.3f}" if isinstance(emoji, (int, float)) else "N/A")
 
     st.sidebar.markdown("**Duration (seconds):**")
     st.sidebar.code(f"{dur}" if dur is not None else "N/A")
@@ -136,7 +136,7 @@ if run or make_silly:
     st.subheader("Evaluation Metrics")
     st.write(f"**Toxicity:** {tox}")
     st.write(f"**Hallucination:** {hal}")
-    st.write(f"**Silly:** {silly}")
+    st.write(f"**emoji:** {emoji}")
 
     st.divider()
 
@@ -163,7 +163,7 @@ if run or make_silly:
         cols = [
             "timestamp",
             "input_preview",
-            "silly_score",  # <-- ADD THIS
+            "emoji_score",
             "toxicity_score",
             "hallucination_score",
             "duration_seconds",

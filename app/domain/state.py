@@ -7,7 +7,7 @@ class GraphState(BaseModel):
 
     toxicity_score: Optional[float] = None
     hallucination_score: Optional[float] = None
-    silly_score: Optional[int] = None
+    emoji_score: Optional[int] = None
 
     token_usage: Optional[Dict[str, Any]] = None
     cost: Optional[float] = None

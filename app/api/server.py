@@ -16,7 +16,7 @@ graph = build_graph()
 # -----------------------------
 class RunRequest(BaseModel):
     input: str
-    silly_mode: bool = False   # <-- NEW, optional
+    emoji_mode: bool = False   # <-- NEW, optional
 
 
 # -----------------------------
@@ -26,13 +26,13 @@ class RunRequest(BaseModel):
 def run_graph(payload: RunRequest):
     """
     Runs the full LangGraph workflow and returns final state.
-    Adds silly_mode to the backend state so the silly-service can read it.
+    Adds emoji_mode to the backend state so the emoji-service can read it.
     """
     try:
         # Base state
         state = {
             "user_input": payload.input,
-            "silly_mode": payload.silly_mode,  # <-- IMPORTANT
+            "emoji_mode": payload.emoji_mode,
         }
 
         # Execute LangGraph
