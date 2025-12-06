@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v3.1.0 (2025-12-06)
+
+### Features
+
+- Adding openAI dep
+  ([`c8ec357`](https://github.com/xbt-a4224j/langgraph-observer/commit/c8ec357aed359f96ac5a00e5f683afa64ab769de))
+
+
 ## v3.0.0 (2025-12-06)
 
 ### Features
