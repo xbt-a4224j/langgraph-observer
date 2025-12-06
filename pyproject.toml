@@ -4,7 +4,15 @@ dynamic = ["version"]
 description = "Dashboard for evaluating a langgraph"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "requests>=2.32.0",
+    "streamlit>=1.33.0",
+    "pandas>=2.0.0"
+]
 
 [tool.semantic_release]
 version_source = "tag"
