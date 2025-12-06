@@ -2,6 +2,9 @@
 
 
 <img width="1341" height="843" alt="Screenshot 2025-12-06 at 6 07 51 PM" src="https://github.com/user-attachments/assets/4fb9375c-69b4-45a4-8949-15d7c6e27b7c" />
+----
+<img width="971" height="416" alt="image" src="https://github.com/user-attachments/assets/ffe2bdb7-a535-42e1-a8a6-f7542167ca50" />
+
 
 A compact environment for running and inspecting a LangGraph workflow. It includes:
 
